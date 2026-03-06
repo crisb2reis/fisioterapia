@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #4B0082;
+  --color-secondary: #40E0D0;
+  --color-background-light: #f8f9fa;
+  --color-background-dark: #1b0f23;
+  --font-display: var(--font-inter), sans-serif;
+  
+  --radius: 1rem;
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+  --radius-full: 9999px;
+  
+  --color-primary-100: #d1c4e9;
+}
+
+/* Permitir rolagem suave para as âncoras */
+html {
+  scroll-behavior: smooth;
+}
