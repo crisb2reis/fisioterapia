@@ -1,0 +1,16 @@
+{
+  "name": "fisioterapia-landing",
+  "version": "1.0.0",
+  "description": "Landing page profissional para fisioterapia",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.98.0"
+  },
+  "devDependencies": {
+    "vite": "^4.5.5"
+  }
+}
