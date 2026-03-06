@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-    // Nome do repositório GitHub para o base path do GitHub Pages
-    base: '/fisioterapia/',
+    // Base relativa para funcionar em qualquer subpasta (GitHub Pages) ou raiz (localhost)
+    base: './',
 })
+
