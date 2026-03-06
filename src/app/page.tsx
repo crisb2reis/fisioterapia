@@ -215,42 +215,42 @@ export default function Home() {
       </main>
 
       {/* FOOTER */}
-      <footer className="bg-[#8A8A8A] text-white pt-12">
+      <footer className="bg-background-dark text-white pt-12">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6 pb-12">
           {/* Col 1 */}
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold tracking-widest text-white leading-tight">CLÍNICA<br /><span className="text-3xl">REACTIVE</span></span>
+              <span className="text-2xl font-bold tracking-widest text-white leading-tight">CLÍNICA<br /><span className="text-3xl text-secondary">REACTIVE</span></span>
             </div>
             <div className="flex gap-2">
-              <a href="#" className="bg-[#ED7C24] hover:bg-[#ED7C24]/90 p-2 text-white flex items-center justify-center w-8 h-8 rounded-sm"><span className="text-sm font-bold">f</span></a>
-              <a href="#" className="bg-[#ED7C24] hover:bg-[#ED7C24]/90 p-2 text-white flex items-center justify-center w-8 h-8 rounded-sm"><span className="material-symbols-outlined text-sm">photo_camera</span></a>
+              <a href="#" className="bg-primary hover:bg-primary/90 p-2 text-white flex items-center justify-center w-8 h-8 rounded-sm"><span className="text-sm font-bold">f</span></a>
+              <a href="#" className="bg-primary hover:bg-primary/90 p-2 text-white flex items-center justify-center w-8 h-8 rounded-sm"><span className="material-symbols-outlined text-sm">photo_camera</span></a>
             </div>
             <div className="mt-2">
-              <h4 className="text-[#ED7C24] font-bold text-xl mb-2">Endereço</h4>
+              <h4 className="text-secondary font-bold text-xl mb-2">Endereço</h4>
               <p className="text-sm text-white/90">Rua dos Macunis, 474 - Alto de Pinheiros</p>
               <p className="text-sm text-white/90">São Paulo - SP - CEP 05444-001</p>
               <div className="flex gap-2 mt-2 text-white">
-                <span className="material-symbols-outlined text-lg">location_on</span>
-                <span className="material-symbols-outlined text-lg">directions_car</span>
+                <span className="material-symbols-outlined text-lg text-secondary">location_on</span>
+                <span className="material-symbols-outlined text-lg text-secondary">directions_car</span>
               </div>
             </div>
           </div>
           {/* Col 2 */}
           <div className="flex flex-col gap-4 mt-2 md:mt-12">
-            <h4 className="text-[#ED7C24] font-bold text-xl">Canais de atendimento</h4>
-            <p className="text-sm text-white/90 flex items-center gap-2">(11) 97655-8574 <span className="material-symbols-outlined text-sm">chat</span></p>
+            <h4 className="text-secondary font-bold text-xl">Canais de atendimento</h4>
+            <p className="text-sm text-white/90 flex items-center gap-2">(11) 97655-8574 <span className="material-symbols-outlined text-sm text-secondary">chat</span></p>
             <p className="text-sm text-white/90">contato@reactive.com.br</p>
           </div>
           {/* Col 3 */}
           <div className="flex flex-col gap-2 mt-2 md:mt-12">
-            <h4 className="text-[#ED7C24] font-bold text-xl mb-2">Especialidades</h4>
+            <h4 className="text-secondary font-bold text-xl mb-2">Especialidades</h4>
             {['Fisioterapia', 'Medicina', 'Estética', 'Massagem', 'Nutrição', 'Pilates', 'Treinamento Funcional'].map(esp => (
               <p key={esp} className="text-sm text-white/90 mb-1">{esp}</p>
             ))}
           </div>
         </div>
-        <div className="bg-[#ED7C24] text-white py-4 px-6 text-xs font-medium">
+        <div className="bg-primary text-white py-4 px-6 text-xs font-medium">
           <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
             <p>Clínica Reactive 2020 - Todos os Direitos Reservados ©</p>
             <p>Desenvolvido por: <strong className="font-bold">OP1 Marketing Digital</strong></p>
