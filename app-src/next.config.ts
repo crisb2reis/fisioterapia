@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
+  basePath: "/fisioterapia",
+  assetPrefix: "/fisioterapia",
   trailingSlash: true,
   images: {
     unoptimized: true,
