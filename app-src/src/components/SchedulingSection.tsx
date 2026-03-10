@@ -2,10 +2,11 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, CheckCircle, Loader2, User, Phone, Mail } from "lucide-react";
 
-// ─── Supabase ──────────────────────────────────────────────────────────────
-// Substitua pelos seus valores reais
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+// ─── Available slots (mock – replace with Google Calendar API) ─────────────
+import { createClient } from "@/lib/supabase/client";
+
+// Tenant id do "Dra. Ana Físio" que inserimos no seed
+const TENANT_ID = "660e8400-e29b-41d4-a716-446655440002"
 
 async function saveToSupabase(data: {
     nome: string;
@@ -14,22 +15,30 @@ async function saveToSupabase(data: {
     data_hora: string | null;
     status: string;
 }) {
-    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return null;
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/consultas_fisioterapia`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            apikey: SUPABASE_ANON_KEY,
-            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-            Prefer: "return=representation",
-        },
-        body: JSON.stringify(data),
-    });
-    if (!res.ok) throw new Error("Erro ao salvar");
-    return await res.json();
+    const supabase = createClient()
+
+    // De acordo com architecture:
+    // leads(tenant_id, name, phone, email, status, extra_data)
+
+    const { data: result, error } = await supabase.from('leads').insert({
+        tenant_id: TENANT_ID,
+        name: data.nome,
+        phone: data.whatsapp,
+        email: data.email,
+        status: data.status,
+        extra_data: {
+            data_hora: data.data_hora
+        }
+    })
+
+    if (error) {
+        console.error("Supabase error:", error)
+        throw new Error(error.message)
+    }
+
+    return result;
 }
 
-// ─── Available slots (mock – replace with Google Calendar API) ─────────────
 const SLOTS = ["08:00", "09:00", "10:00", "11:00", "14:00", "15:00", "16:00", "17:00"];
 const BUSY = ["09:00", "14:00"]; // horários ocupados (simulado)
 
@@ -110,7 +119,7 @@ export default function SchedulingSection() {
             .toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long", hour: "2-digit", minute: "2-digit" });
 
         const gcLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Consulta+de+Fisioterapia&details=Consulta+agendada+com+a+equipe+FisioTerapia+Pro&dates=${new Date(viewYear, viewMonth, selectedDay!, parseInt(selectedSlot!), 0)
-                .toISOString().replace(/[-:]/g, "").split(".")[0]
+            .toISOString().replace(/[-:]/g, "").split(".")[0]
             }Z/${new Date(viewYear, viewMonth, selectedDay!, parseInt(selectedSlot!) + 1, 0)
                 .toISOString().replace(/[-:]/g, "").split(".")[0]
             }Z`;
@@ -196,10 +205,10 @@ export default function SchedulingSection() {
                                             disabled={disabled}
                                             onClick={() => { setSelectedDay(day); setSelectedSlot(null); }}
                                             className={`aspect-square rounded-lg text-xs font-medium flex items-center justify-center transition-all duration-150 ${disabled
-                                                    ? "text-gray-300 cursor-not-allowed"
-                                                    : active
-                                                        ? "bg-teal-600 text-white shadow-md"
-                                                        : "hover:bg-teal-50 hover:text-teal-700 text-gray-700"
+                                                ? "text-gray-300 cursor-not-allowed"
+                                                : active
+                                                    ? "bg-teal-600 text-white shadow-md"
+                                                    : "hover:bg-teal-50 hover:text-teal-700 text-gray-700"
                                                 }`}
                                         >
                                             {day}
@@ -225,10 +234,10 @@ export default function SchedulingSection() {
                                                     disabled={busy}
                                                     onClick={() => setSelectedSlot(slot)}
                                                     className={`py-2 rounded-lg text-xs font-semibold border transition-all duration-150 time-slot ${busy
-                                                            ? "disabled"
-                                                            : selected
-                                                                ? "selected"
-                                                                : "border-gray-200 text-gray-600"
+                                                        ? "disabled"
+                                                        : selected
+                                                            ? "selected"
+                                                            : "border-gray-200 text-gray-600"
                                                         }`}
                                                 >
                                                     {slot}
