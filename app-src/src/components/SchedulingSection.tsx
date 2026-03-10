@@ -96,7 +96,10 @@ export default function SchedulingSection() {
         try {
             await saveToSupabase({ nome: form.nome, whatsapp: form.whatsapp, email: form.email, data_hora: null, status: "lead" });
             setLeadSaved(true);
-        } catch (_) { /* silent */ }
+        } catch (err) {
+            // Falha silenciosa para o usuário, mas logamos para debug
+            console.warn('[Fisioterapia] Captura parcial de lead falhou (não afeta o agendamento):', err);
+        }
     }
 
     async function handleSubmit(e: React.FormEvent) {
@@ -109,7 +112,9 @@ export default function SchedulingSection() {
         try {
             await saveToSupabase({ ...form, data_hora: dataHora, status: "agendado" });
             setStatus("success");
-        } catch {
+        } catch (err) {
+            console.error('[Fisioterapia] ❌ Erro ao confirmar agendamento:', err);
+            console.error('[Fisioterapia] Dados tentados:', { ...form, data_hora: dataHora, status: "agendado" });
             setStatus("error");
         }
     }
